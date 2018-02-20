@@ -7,23 +7,23 @@ export default class Base {
    * @param  {[type]} name [description]
    * @return {[type]}      [description]
    */
-  constructor(name) {
+  constructor (name) {
     // props
-    this.name = name;
+    this.name = name
   }
 
   /**
    * setup
    * @return {[type]} [description]
    */
-  setup() {
-    console.log('super : ' + this.name);
+  setup () {
+    console.log('super : ' + this.name)
   }
 
   /**
    * update
    * @return {[type]} [description]
    */
-  update() {
+  update () {
   }
 }

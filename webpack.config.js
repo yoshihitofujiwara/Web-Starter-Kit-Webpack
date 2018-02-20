@@ -1,16 +1,16 @@
 // ここ後で調整
 // リリースモード判定フラグ
 let IS_REL = (() => {
-  let _arg = process.argv.slice(1)[2];
+  const _arg = process.argv.slice(1)[2];
   console.log(process.argv);
-  return !!(_arg && _arg.indexOf("rel") !== -1);
+  return Boolean(_arg && _arg.indexOf("rel") !== -1);
 })();
 console.log("リリースモード：" + IS_REL);
 IS_REL = true;
 
 
 const webpack = require("webpack"),
-  ExtractTextPlugin = require('extract-text-webpack-plugin');
+  ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const NODE = `${__dirname}/node_modules/`;
 const NOOP = () => { };
@@ -18,25 +18,25 @@ const DEV = `${__dirname}/develop/assets/`;
 const DOC = `${__dirname}/htdocs/assets/`;
 
 
-/*--------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
   config
 --------------------------------------------------------------------------*/
-let config = {
+const config = {
   entry: {
     bundle: `${DEV}js/bundle.js`,
-    app: `${DEV}js/app-es/index.js`
+    app: `${DEV}js/app-es/index.js`,
   },
 
   output: {
     path: `${DOC}js`,
-    filename: "[name].js"
+    filename: "[name].js",
   },
 
   module: {
     rules: [
       {
         test: /\.(glsl|vert|frag)$/,
-        loader: "webpack-glsl-loader"
+        loader: "webpack-glsl-loader",
       },
       {
         test: /\.js[x]?$/,
@@ -46,19 +46,19 @@ let config = {
             presets: [
               ["env", {
                 targets: { browsers: ["last 2 versions"] },
-                modules: false
-              }]
-            ]
-          }
+                modules: false,
+              }],
+            ],
+          },
         }],
         exclude: NODE,
-      }
-    ]
+      },
+    ],
   },
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      compress: { drop_console: IS_REL}
+      compress: { drop_console: IS_REL},
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
   ],
@@ -70,23 +70,23 @@ let config = {
     contentBase: `${__dirname}/htdocs/`,
     publicPath: "/assets/",
     watchOptions: {
-      poll: true
-    }
-  }
+      poll: true,
+    },
+  },
 };
 
 
-/*--------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
   configCSS
 --------------------------------------------------------------------------*/
-let configCSS = {
+const configCSS = {
   entry: {
     styles: `${DEV}css/styles.scss`,
   },
 
   output: {
     path: `${DOC}css/`,
-    filename: "[name].css"
+    filename: "[name].css",
   },
 
   module: {
@@ -98,38 +98,38 @@ let configCSS = {
           loader: "css-loader",
           options: {
             url: false,
-            sourceMap: false
-          }
+            sourceMap: false,
+          },
         }, {
           loader: "postcss-loader",
           options: {
             plugins: (loader) => [
               require("autoprefixer")(
                 { browsers: ["last 2 versions"] }
-              )
+              ),
             ],
-            sourceMap: false
-          }
+            sourceMap: false,
+          },
         }, {
           loader: "sass-loader",
           options: {
             outputStyle: IS_REL ? "compressed" : "expanded",
-            sourceMap: false
-          }
-        }
-        ]
+            sourceMap: false,
+          },
+        },
+        ],
       }),
-      exclude: NODE
-    }]
+      exclude: NODE,
+    }],
   },
 
   plugins: [
-    new ExtractTextPlugin("[name].css")
-  ]
+    new ExtractTextPlugin("[name].css"),
+  ],
 };
 
 
-/*==========================================================================
+/* ==========================================================================
   exports
 ==========================================================================*/
 module.exports = [config, configCSS];

@@ -1,7 +1,7 @@
 (function () {
 
 
-  function Child(name, num){
+  function Child (name, num) {
     // super class call
     app.Base.call(this, name);
 
@@ -18,7 +18,7 @@
    * setup
    * @return {[type]} [description]
    */
-  p.setup = function() {
+  p.setup = function () {
     console.log('child : ' + this.name);
   };
 
@@ -28,10 +28,10 @@
 
 
 
-  /*--------------------------------------------------------------------------
+  /* --------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
   app.Child = Child;
 
 
-}());
+})();
