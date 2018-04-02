@@ -1,4 +1,4 @@
-import Base from './Base';
+import Base from './Base'
 
 /**
  * @class Child
@@ -11,10 +11,10 @@ export default class Child extends Base {
    * @param  {[type]} num [description]
    * @return {[type]}      [description]
    */
-  constructor(name, num) {
-    super(name);
+  constructor (name, num) {
+    super(name)
 
-    this.num = num;
+    this.num = num
   }
 
   /**
@@ -22,8 +22,8 @@ export default class Child extends Base {
    * setup
    * @return {[type]} [description]
    */
-  setup() {
-    super.setup();
-    console.log('child : ' + this.name + this.num);
+  setup () {
+    super.setup()
+    console.log('child : ' + this.name + this.num)
   }
 }
